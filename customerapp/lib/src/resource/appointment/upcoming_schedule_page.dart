@@ -1,9 +1,11 @@
-import 'package:customerapp/src/resource/navigation_bar/appointment/reschedule_page.dart';
+
+import 'package:customerapp/src/resource/appointment/reschedule_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../main.dart';
-import '../../../api/delete_appointment.dart';
-import '../../../api/upcoming_appointment.dart';
+import '../../api/delete_appointment.dart';
+import '../../api/upcoming_appointment.dart';
+
 
 
 class UpcomingSchedule extends StatefulWidget {

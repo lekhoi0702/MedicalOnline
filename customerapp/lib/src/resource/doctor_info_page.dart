@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../api/doctor_info.dart';
-import 'navigation_bar/appointment/create_appointment_page.dart';
+import 'appointment/create_appointment_page.dart';
+
 
 class DoctorInfoPage extends StatefulWidget {
   final int doctorID;

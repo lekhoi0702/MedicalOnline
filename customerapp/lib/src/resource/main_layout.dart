@@ -1,8 +1,10 @@
 
 import 'package:flutter/material.dart';
 
-import 'navigation_bar/home_page.dart';
-import 'navigation_bar/schedule_page.dart';
+import 'appointment/schedule_page.dart';
+import 'home_page.dart';
+
+
 
 
 

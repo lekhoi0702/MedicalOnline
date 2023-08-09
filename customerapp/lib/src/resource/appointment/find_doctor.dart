@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../api/get_doctor.dart';
-import '../../doctor_info_page.dart';
+
+import '../../api/get_doctor.dart';
+import '../doctor_info_page.dart';
+
 
 class CreateAppointmentPage extends StatefulWidget {
   @override

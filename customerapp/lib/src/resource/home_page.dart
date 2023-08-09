@@ -1,5 +1,6 @@
 
 import 'package:customerapp/src/api/appointment_today.dart';
+import 'package:customerapp/src/resource/videocall.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
@@ -7,12 +8,11 @@ import 'package:intl/intl.dart';
 
 import '../../../config.dart';
 import '../../../main.dart';
-import '../../api/confirmed_appointment.dart';
-import '../../api/get_doctor.dart';
-import '../../videocall.dart';
-import '../doctor_info_page.dart';
-import '../medical_history.dart';
+
+import '../api/get_doctor.dart';
 import 'appointment/find_doctor.dart';
+import 'doctor_info_page.dart';
+import 'medical_history.dart';
 
 
 

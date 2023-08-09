@@ -1,8 +1,10 @@
-import 'package:customerapp/src/resource/navigation_bar/appointment/complete_shedule_page.dart';
-import 'package:customerapp/src/resource/navigation_bar/appointment/confirm_schedule_page.dart';
+
+import 'package:customerapp/src/resource/appointment/upcoming_schedule_page.dart';
 import 'package:flutter/material.dart';
 
-import 'appointment/upcoming_schedule_page.dart';
+import 'complete_shedule_page.dart';
+import 'confirm_schedule_page.dart';
+
 
 
 

@@ -104,11 +104,6 @@ class _LoginPageState extends State<LoginPage> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(6)))),
                         ),
-
-                        /*GestureDetector(
-                        onTap: showPass,
-                        child: Text(_showPassword ? "HIDE" : "SHOW",style: TextStyle(color: Colors.blue,fontSize: 12, fontWeight: FontWeight.bold),),
-                      )*/
                       ],
                     ),
                   ),
@@ -117,17 +112,6 @@ class _LoginPageState extends State<LoginPage> {
                       'Sai tài khoản hoặc mật khẩu',
                       style: TextStyle(color: Colors.red),
                     ),
-                  /*Container(
-                    constraints: BoxConstraints.loose(Size(double.infinity,30)),
-                    alignment: AlignmentDirectional.centerEnd,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(0,0,0,5),
-                      child: Text(
-                          "QUÊN MẬT KHẨU?",
-                          style: TextStyle(fontSize: 10,color: Colors.blue)),
-
-                    ),
-                  ),*/
                   Padding(
                     padding: const EdgeInsets.fromLTRB(500, 0, 500, 0),
                     child: SizedBox(
@@ -135,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                       height: 56,
                       child: ElevatedButton(
                         onPressed: () async {
-                           await onSignInClicked(context);
+                          await onSignInClicked(context);
                         },
                         style: ButtonStyle(
                           backgroundColor:
@@ -150,33 +134,6 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-                  /*Padding(
-                      padding: const EdgeInsets.fromLTRB(0,20,0,20),
-                      child: RichText(
-                          text: TextSpan(
-                              text: "Bạn chưa có tài khoản?",
-                              style: TextStyle(color: Colors.black,fontSize: 13),
-                              children: <TextSpan>[
-                                TextSpan(
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                       */ /* Navigator.push(context, MaterialPageRoute(builder:(context)=>SignUpPage()));*/ /*
-
-
-
-                                      },
-                                    text: " đăng ký ngay",
-                                    style: TextStyle(
-                                        color: Colors.blue,fontSize: 13
-                                    )
-
-                                )
-                              ]
-
-
-
-                          )
-                      )),*/
                 ],
               ),
             )),
@@ -190,16 +147,17 @@ class _LoginPageState extends State<LoginPage> {
         _usernameController.text,
         _passController.text,
       );
-      userData  = response;
-      print(userData);
+      if (response['status'] == 1) {
+        userData = response;
+        print(userData);
 
-      // Chuyển đến trang HomePage và truyền response vào
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomePage(),
-        ),
-      );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomePage(),
+          ),
+        );
+      }
     } catch (error) {
       setState(() {
         _isLoginError = true;

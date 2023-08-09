@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../main.dart';
-import '../../../api/confirmed_appointment.dart';
-import '../../../api/delete_appointment.dart';
+import '../../api/confirmed_appointment.dart';
+import '../../api/delete_appointment.dart';
 
 class ConfirmedSchedule extends StatefulWidget {
   const ConfirmedSchedule({Key? key}) : super(key: key);
