@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../api/doctor_info.dart';
 import 'appointment/create_appointment_page.dart';
 
-
 class DoctorInfoPage extends StatefulWidget {
   final int doctorID;
 
@@ -16,6 +15,7 @@ class DoctorInfoPage extends StatefulWidget {
 
 class _DoctorInfoPageState extends State<DoctorInfoPage> {
   Map<String, dynamic>? InfoBs;
+  String avatar = 'https://i.pinimg.com/280x280_RS/59/61/d1/5961d1023d1635d91e1d2ca64b7ff246.jpg';
 
   //late final int doctorID;
   void initState() {
@@ -51,18 +51,17 @@ class _DoctorInfoPageState extends State<DoctorInfoPage> {
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 20),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         CircleAvatar(
-                          backgroundImage:
-                              AssetImage('assets/image/avatar.png'),
-                          radius: 30,
+                          backgroundImage: NetworkImage(avatar),
+                          radius: 40,
                         ),
                         SizedBox(height: 15),
                         Text(
-                          "Dr. ${InfoBs?['name']}",
+                          "Dr. ${InfoBs?['doctorName']}",
                           style: TextStyle(
                             fontSize: 23,
                             fontWeight: FontWeight.w500,
@@ -269,6 +268,7 @@ class _DoctorInfoPageState extends State<DoctorInfoPage> {
       dynamic response = await ApiServiceInfoBS.info_bacsi(widget.doctorID);
       setState(() {
         InfoBs = response;
+        avatar = InfoBs?['avatar'];
       });
     } catch (e) {
       print('Error fetching appointments: $e');

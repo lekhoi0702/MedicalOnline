@@ -19,15 +19,8 @@ class ApiServiceUpcoming {
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(requestBody),
       );
+      return jsonDecode(response.body);
 
-      if (response.statusCode == 200) {
-
-        // Đăng nhập thành công
-        return jsonDecode(response.body);
-      } else {
-        // Đăng nhập thất bại
-        throw Exception('Failed to login: ${response.reasonPhrase}');
-      }
     } catch (error) {
 
       throw Exception('Error: $error');

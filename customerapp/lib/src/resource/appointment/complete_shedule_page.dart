@@ -1,4 +1,5 @@
 import 'package:customerapp/src/api/complete_appointment.dart';
+import 'package:customerapp/src/resource/appointment/doctor_rating.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../main.dart';
@@ -159,6 +160,32 @@ class _CompletedScheduleState extends State<CompletedSchedule> {
                                     ),
                                   ),
                                 ),
+                                SizedBox(height: 10),
+                                InkWell(
+                                  onTap: (){
+                                  _gotoDoctorRating(appointment);
+                                  },
+                                  child: Container(
+                                    width: 150,
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 12),
+                                    decoration: BoxDecoration(
+                                      color: Colors.purple,
+                                      borderRadius:
+                                      BorderRadius.circular(10),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        "Đánh giá",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
 
                               ],
                             ),
@@ -205,6 +232,16 @@ class _CompletedScheduleState extends State<CompletedSchedule> {
           );
     });
   }
+
+  void _gotoDoctorRating(dynamic appointment){
+    setState(() {
+      Navigator.push(context,
+        MaterialPageRoute(builder: (context)=>DoctorRatingPage(appointment:appointment),),
+      );
+    });
+  }
+
+
 
 
 }

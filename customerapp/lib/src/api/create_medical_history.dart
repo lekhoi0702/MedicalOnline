@@ -3,11 +3,16 @@ import 'dart:convert';
 
 import '../../main.dart';
 
-class ApiServiceConfirmed {
-  static final String apiUrl = '${ipServer}KHAppointmentScreen/Confirm';
+class ApiServiceCreateMedHistory {
+  static final String apiUrl = '${ipServer}KHMedicalHistory/Create';
 
-  static Future<List<dynamic>> confirmed(int maKH) async {
-    Map<String, int> requestBody = {'maKH': maKH};
+  static Future<Map<String, dynamic>> create_medical_history(
+      int maKH, String tenbenh, String ngayBD) async {
+    Map<String, String> requestBody = {
+      "maKH": maKH.toString(),
+      "tenBenh": tenbenh,
+      "ngayBD": ngayBD
+    };
 
     try {
       final response = await http.post(
@@ -17,6 +22,7 @@ class ApiServiceConfirmed {
       );
       return jsonDecode(response.body);
     } catch (error) {
+      // Xử lý lỗi nếu có
       throw Exception('Error: $error');
     }
   }

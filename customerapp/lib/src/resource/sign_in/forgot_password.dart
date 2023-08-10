@@ -1,3 +1,4 @@
+import 'package:customerapp/src/api/check_mail.dart';
 import 'package:customerapp/src/api/check_username.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -186,13 +187,14 @@ class ResetPasswordPageState extends State<ResetPasswordPage> {
 
 
   void onVerifyClicked() {
+    String username = _userNameController.text.trim();
     String verificationCodeText = _verificationCodeController.text;
     if (verificationCodeText == _verificationCode) {
-      // Mã xác nhận nhập đúng, chuyển hướng sang trang nhập mật khẩu mới
+
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => NewPasswordPage(), // Trang nhập mật khẩu mới
+          builder: (context) => NewPasswordPage(username:username),
         ),
       );
     } else {
@@ -211,7 +213,6 @@ class ResetPasswordPageState extends State<ResetPasswordPage> {
   }
 
   void onResetClicked() async {
-    // Lấy email từ người dùng
     String emailAddress = _emailController.text.trim();
     String username = _userNameController.text.trim();
     if (username.isEmpty){
@@ -221,7 +222,7 @@ class ResetPasswordPageState extends State<ResetPasswordPage> {
     } else {
       Map<String, dynamic> result = await ApiServiceCheckUserName.check_user(username);
       print(result);
-      if (result != 1){
+      if (result['count'] != 1){
         setState(() {
           _verificationErrorUserName = "Tài khoản không hợp lệ";
         });
@@ -232,43 +233,54 @@ class ResetPasswordPageState extends State<ResetPasswordPage> {
         _verificationErrorEmail = "Vui lòng nhập địa chỉ email.";
       });
     } else {
-      try {
-        // Gọi hàm gửi mã xác nhận tới email
-        String verificationCode = generateRandomCode(); // Hàm để tạo mã xác nhận ngẫu nhiên
-        await sendVerificationCode(emailAddress, verificationCode);
-
-        // Set _showVerificationCodeInput thành true để hiển thị ô nhập mã xác nhận và nút xác nhận
+      Map<String, dynamic> result = await ApiServiceCheckMail.check_mail(
+          username, emailAddress);
+      if (result['count'] != 1) {
         setState(() {
-          _showVerificationCodeInput = true;
-          _verificationCode = verificationCode; // Lưu mã xác nhận để so sánh sau này
-          _verificationError = ""; // Xóa thông báo lỗi nếu có
-          _verificationErrorEmail ='';
-          _verificationErrorUserName = '';
+          _verificationErrorEmail = "Email không khớp với tài khoản";
         });
-      } catch (error) {
-        // Xử lý lỗi nếu có
-        print('Error: $error');
+      } else {
+        try {
+          // Gọi hàm gửi mã xác nhận tới email
+          String verificationCode = generateRandomCode(); // Hàm để tạo mã xác nhận ngẫu nhiên
+          await sendVerificationCode(emailAddress, verificationCode);
+
+          // Set _showVerificationCodeInput thành true để hiển thị ô nhập mã xác nhận và nút xác nhận
+          setState(() {
+            _showVerificationCodeInput = true;
+            _verificationCode = verificationCode; // Lưu mã xác nhận để so sánh sau này
+            _verificationError = ""; // Xóa thông báo lỗi nếu có
+            _verificationErrorEmail ='';
+            _verificationErrorUserName = '';
+          });
+        } catch (error) {
+          // Xử lý lỗi nếu có
+          print('Error: $error');
+        }
       }
     }
-  }
 
-
+    }
   String generateRandomCode() {
     final random = Random();
     // Generate a random integer between 100000 and 999999 (inclusive)
     int randomCode = random.nextInt(900000) + 100000;
     return randomCode.toString();
   }
-
-
-
-
   Widget gotoLogin (BuildContext Context) {
     return LoginPage();
   }
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

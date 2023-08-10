@@ -6,6 +6,7 @@ import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 
 import '../../main.dart';
 import '../api/get_token.dart';
+import 'home_page.dart';
 
 
 
@@ -24,8 +25,8 @@ class VideoCallScreen extends StatefulWidget {
 
 class _VideoCallScreenState extends State<VideoCallScreen> {
   Map<String,dynamic>? agora;
-  String channelName = '';
-  String token = '';
+  String channelName = 'chanel4';
+  String token = '00682a5215398224c838cc2d4b6150be91eIACDGOsPRpyE9jaUkdC1DfuvynItkBc47BDPLOSe4xLMh4U2rBvSY0iIIgBCE4oYpAnVZAQAAQA0xtNkAgA0xtNkAwA0xtNkBAA0xtNk';
 
   int uid = userData?['id']; // uid of the local user
 
@@ -46,7 +47,7 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
   @override
   void initState() {
     super.initState();
-    _getVideo();
+ //   _getVideo();
     // Set up an instance of Agora engine
     setupVideoSDKEngine();
   }
@@ -225,11 +226,17 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
     setState(() {
       _isJoined = false;
       _remoteUid = null;
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomePage(),
+        ),
+      );
     });
     agoraEngine.leaveChannel();
   }
 
-  void _getVideo() async {
+ /* void _getVideo() async {
     int malh = widget.maLH;
     try {
       dynamic response =
@@ -243,7 +250,7 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
     } catch (e) {
       print('Error fetching appointments: $e');
     }
-  }
+  }*/
 
 
 

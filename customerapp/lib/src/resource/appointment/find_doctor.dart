@@ -67,7 +67,7 @@ class _CreateAppointmentPageState extends State<CreateAppointmentPage> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => DoctorInfoPage(
-                            doctorID: doctors['id'],
+                            doctorID: doctors['maBS'],
                           ),
                         ),
                       );
@@ -92,12 +92,11 @@ class _CreateAppointmentPageState extends State<CreateAppointmentPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CircleAvatar(
-                            backgroundImage:
-                                AssetImage('assets/image/avatar.png'),
+                            backgroundImage: NetworkImage(doctors['avatar']),
                             radius: 30,
                           ),
                           Text(
-                            'Bác sĩ ${doctors['lastName']}',
+                            'Bác sĩ ${doctors['doctorName']}',
                             style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,

@@ -8,7 +8,7 @@ class ApiServiceAddDoctor {
   static final String apiUrl = '${ipServer}ADCreateAccount/Doctor'; // Thay thế your_api_url bằng địa chỉ của Flask API
 
   static Future<Map<String, dynamic>> add_doctor(String username, String password,String firstname, String lastname,
-      String phonenumber, String chuyenkhoa, String email, String ngaysinh) async {
+      String phonenumber, String chuyenkhoa, String email, String ngaysinh,String avatar,String gioithieu) async {
     Map<String, String> requestBody = {
       'userName': username,
       'password': password,
@@ -17,7 +17,9 @@ class ApiServiceAddDoctor {
       'phoneNumber':phonenumber,
       'email':email,
       'ngaySinh': ngaysinh,
-      'chuyenKhoa':chuyenkhoa
+      'chuyenKhoa':chuyenkhoa,
+      'avatar':avatar,
+      'gioiThieu':gioithieu
 
     };
 
