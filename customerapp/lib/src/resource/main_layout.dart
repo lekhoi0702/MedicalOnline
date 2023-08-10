@@ -1,4 +1,5 @@
 
+import 'package:customerapp/src/api/profile.dart';
 import 'package:flutter/material.dart';
 
 import 'appointment/schedule_page.dart';
@@ -32,6 +33,7 @@ class _MainLayoutState extends State<MainLayout> {
         children: <Widget>[
           const HomePage(),
           ScheduleScreen(),
+          CustomerProfileScreen(),
 
           // ProfilePage(),
         ],
@@ -57,6 +59,11 @@ class _MainLayoutState extends State<MainLayout> {
             icon: Icon(Icons.calendar_today),
             label: 'Lịch hẹn',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Tài khoản',
+          ),
+
 
 
         ],
