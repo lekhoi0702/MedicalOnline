@@ -25,7 +25,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("LỊCH HẸN",style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+        title: Text("LỊCH HẸN",style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
         // backgroundColor: Colors.white,
         //foregroundColor: Colors.black,
         centerTitle: true,

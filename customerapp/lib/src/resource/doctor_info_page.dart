@@ -1,7 +1,9 @@
+import 'package:customerapp/src/api/get_danhgia_doctor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../api/doctor_info.dart';
+import '../api/get_danhgia.dart';
 import 'appointment/create_appointment_page.dart';
 
 class DoctorInfoPage extends StatefulWidget {
@@ -15,6 +17,7 @@ class DoctorInfoPage extends StatefulWidget {
 
 class _DoctorInfoPageState extends State<DoctorInfoPage> {
   Map<String, dynamic>? InfoBs;
+  List<dynamic> Danhgia = [];
   String avatar = 'https://i.pinimg.com/280x280_RS/59/61/d1/5961d1023d1635d91e1d2ca64b7ff246.jpg';
 
   //late final int doctorID;
@@ -123,25 +126,19 @@ class _DoctorInfoPageState extends State<DoctorInfoPage> {
                             fontSize: 18, fontWeight: FontWeight.w500),
                       ),
                       SizedBox(width: 10),
-                      Text(
-                        '${InfoBs?['danhGia']}',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                        ),
-                      ),
-                      Icon(Icons.star, color: Colors.amber),
-                      SizedBox(width: 5),
-                      Spacer(),
+
+
                     ],
                   ),
                   SizedBox(
                     height: 160,
                     // width: 200,
-                    child: ListView.builder(
+                    child:  ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: 4,
+                      shrinkWrap: true,
+                      itemCount: Danhgia.length,
                       itemBuilder: (context, index) {
+                        dynamic khdanhgia = Danhgia[index];
                         return Container(
                           margin: EdgeInsets.all(10),
                           padding: EdgeInsets.symmetric(vertical: 5),
@@ -157,22 +154,21 @@ class _DoctorInfoPageState extends State<DoctorInfoPage> {
                             ],
                           ),
                           child: SizedBox(
-                            width: MediaQuery.of(context).size.width / 1.4,
+                            width: 300,
                             child: Column(
                               children: [
                                 ListTile(
                                   leading: CircleAvatar(
                                     radius: 25,
                                     backgroundImage:
-                                        AssetImage("assets/image/logo.png"),
+                                    AssetImage("assets/image/avatar.png"),
                                   ),
                                   title: Text(
-                                    "Dr. Doctor Name",
+                                    "Khách hàng ${khdanhgia['customerName']}",
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  subtitle: Text("1 day ago"),
                                   trailing: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -182,7 +178,7 @@ class _DoctorInfoPageState extends State<DoctorInfoPage> {
                                         color: Colors.amber,
                                       ),
                                       Text(
-                                        "4.9",
+                                        "${khdanhgia['sao']}",
                                         style: TextStyle(
                                           color: Colors.black54,
                                         ),
@@ -197,7 +193,7 @@ class _DoctorInfoPageState extends State<DoctorInfoPage> {
                                   child: Text(
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
-                                    "Many thanks to Dr. Dear. He is a great and a professional doctor.",
+                                    "${khdanhgia['message']}",
                                     style: TextStyle(
                                       color: Colors.black,
                                     ),
@@ -219,7 +215,7 @@ class _DoctorInfoPageState extends State<DoctorInfoPage> {
       ),
       bottomNavigationBar: Container(
         padding: EdgeInsets.all(15),
-        height: 140,
+        height: 90,
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
@@ -235,7 +231,6 @@ class _DoctorInfoPageState extends State<DoctorInfoPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
             ),
-            SizedBox(height: 15),
             InkWell(
               onTap: _createCalendar,
               child: Container(
@@ -269,6 +264,7 @@ class _DoctorInfoPageState extends State<DoctorInfoPage> {
       setState(() {
         InfoBs = response;
         avatar = InfoBs?['avatar'];
+        _getDanhgia(InfoBs?['maBS']);
       });
     } catch (e) {
       print('Error fetching appointments: $e');
@@ -283,5 +279,18 @@ class _DoctorInfoPageState extends State<DoctorInfoPage> {
         builder: (context) => CreateCalendarPage(doctorID: widget.doctorID),
       ),
     );
+  }
+
+  void _getDanhgia(int mabs) async {
+    try {
+      dynamic response =
+      await ApiServiceGetDanhGiaBS.get_danhgiabs(mabs);
+      setState(() {
+        Danhgia = response;
+      });
+    } catch (error) {
+      print(error);
+    }
+
   }
 }

@@ -47,7 +47,18 @@ class _ReschedulePageState extends State<ReschedulePage> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Text('Đặt lịch'),
+        title: Text("CHỌN KHUNG GIỜ",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+        // backgroundColor: Colors.white,
+        //foregroundColor: Colors.black,
+        centerTitle: true,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+            size: 30.0,
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
       ),
       body: Center(
         child: Column(
@@ -111,7 +122,7 @@ class _ReschedulePageState extends State<ReschedulePage> {
       ),
       bottomNavigationBar: Container(
         padding: EdgeInsets.all(15),
-        height: 140,
+        height: 90,
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
@@ -128,7 +139,7 @@ class _ReschedulePageState extends State<ReschedulePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
             ),
-            SizedBox(height: 15),
+
             InkWell(
               onTap: _CreateCalendar,
               child: Container(

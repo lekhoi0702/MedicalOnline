@@ -1,12 +1,9 @@
+import 'package:agora_uikit/agora_uikit.dart';
 import 'package:customerapp/src/api/appointment_today.dart';
 import 'package:customerapp/src/resource/videocall.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'package:intl/intl.dart';
-
 import '../../../config.dart';
 import '../../../main.dart';
-
 import '../api/delete_appointment.dart';
 import '../api/get_doctor.dart';
 import 'appointment/find_doctor.dart';
@@ -14,7 +11,6 @@ import 'doctor_info_page.dart';
 import 'medical_history.dart';
 
 class HomePage extends StatefulWidget {
-//  final Map<String, dynamic> response;
 
   const HomePage({Key? key}) : super(key: key);
 
@@ -49,8 +45,20 @@ class _HomePageState extends State<HomePage> {
     Config().init(context);
     /*  _getAppointments();*/
     String lastName = userData?['lastName'];
-    return MaterialApp(
-        home: Scaffold(
+    return
+      Scaffold(
+          appBar: AppBar(
+            title: Text("ONLINE MEDICAL",
+                style: TextStyle(
+                  fontFamily: 'fontHome',
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: 28,
+                )),
+            centerTitle: true,
+            automaticallyImplyLeading: false,
+
+          ),
             body: Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 0,
@@ -62,31 +70,6 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Container(
-                height: 70,
-                decoration: BoxDecoration(
-                  color: Colors.lightBlue,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      child: Container(
-                        child: Image.asset('assets/image/logo.png'),
-                      ),
-                    ),
-                    Text(
-                      "online medical",
-                      style: TextStyle(
-                        fontFamily: 'fontHome',
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontSize: 23,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -472,7 +455,7 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   Text('Bác sĩ: ${doctors['doctorName']}'),
                                   Text('Chuyên khoa: ${doctors['chuyenKhoa']}'),
-                                  Row(
+                           /*       Row(
                                     children: [
                                       Text('Đánh giá: $formattedDanhGia'),
                                       Icon(
@@ -480,7 +463,7 @@ class _HomePageState extends State<HomePage> {
                                         color: Colors.amber,
                                       )
                                     ],
-                                  ),
+                                  ),*/
                                 ],
                               ),
                               onTap: () {
@@ -488,7 +471,7 @@ class _HomePageState extends State<HomePage> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => DoctorInfoPage(
-                                              doctorID: doctors['id'],
+                                              doctorID: doctors['maBS'],
                                             )));
                               }),
                         );
@@ -499,7 +482,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-    )));
+    ));
   }
 
   Future<void> _showConfirmationDialog(int maLH, int maBS) async {
@@ -587,7 +570,11 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  void _gotoCallVideoPage(int maLH) {
+  void _gotoCallVideoPage(int maLH) async {
+    await [
+      Permission.camera,
+      Permission.microphone
+    ].request();
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => VideoCallScreen(maLH: maLH)),

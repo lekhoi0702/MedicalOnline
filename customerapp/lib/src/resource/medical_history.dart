@@ -27,7 +27,18 @@ class _MedicalHistoryPageState extends State<MedicalHistoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tiền sử bệnh'),
+        title: Text("TIỀN SỬ BỆNH",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+        // backgroundColor: Colors.white,
+        //foregroundColor: Colors.black,
+        centerTitle: true,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+            size: 30.0,
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

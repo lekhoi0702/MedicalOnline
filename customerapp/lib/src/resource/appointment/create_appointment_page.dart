@@ -49,7 +49,7 @@ class _CreateCalendarPageState extends State<CreateCalendarPage> {
       key: _scaffoldKey,
       appBar: AppBar(
         title: Text("CHỌN KHUNG GIỜ",
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
         // backgroundColor: Colors.white,
         //foregroundColor: Colors.black,
         centerTitle: true,
@@ -127,7 +127,7 @@ class _CreateCalendarPageState extends State<CreateCalendarPage> {
       ),
       bottomNavigationBar: Container(
         padding: EdgeInsets.all(15),
-        height: 140,
+        height: 90,
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
@@ -143,7 +143,6 @@ class _CreateCalendarPageState extends State<CreateCalendarPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
             ),
-            SizedBox(height: 15),
             InkWell(
               onTap: _CreateCalendar,
               child: Container(

@@ -23,7 +23,7 @@ class _CreateAppointmentPageState extends State<CreateAppointmentPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("TÌM BÁC SĨ",
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
         // backgroundColor: Colors.white,
         //foregroundColor: Colors.black,
         centerTitle: true,

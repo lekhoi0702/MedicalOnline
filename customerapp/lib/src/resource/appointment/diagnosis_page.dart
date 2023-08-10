@@ -34,7 +34,7 @@ class _DiagnosisPageState extends State<DiagnosisPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("CHẨN ĐOÁN",style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+        title: Text("CHẨN ĐOÁN",style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
         // backgroundColor: Colors.white,
         //foregroundColor: Colors.black,
         centerTitle: true,
@@ -68,6 +68,7 @@ class _DiagnosisPageState extends State<DiagnosisPage> {
                   "Ngày hẹn: ${diagnosis?['ngayKham']}",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
+                SizedBox(height: 10),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
