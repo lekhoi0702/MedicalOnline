@@ -16,7 +16,7 @@ class VideoCallScreen extends StatefulWidget {
 class _VideoCallScreenState extends State<VideoCallScreen> {
   Map<String, dynamic>? agora;
   late String channelName = 'chanel1';
-  late String token = '007eJxTYIgp+XK7JCukm+nqYzsuUxbLNtl33e8tLk1dw5T5ziBP8qMCg4VRoqmRoamxpYWRkUmyhbFFcrJRikmSmaGpQVKqpWHq1W1XUhoCGRlYpk1lYmSAQBCfnSE5IzEvNceQgQEAdfAf1Q==';
+  late String token = '007eJxTYAgLtHevlz92QIvx21mf77OOvw7umt8ZUq9jap4fJPk8kluBwcIo0dTI0NTY0sLIyCTZwtgiOdkoxSTJzNDUICnV0jB18berKQ2BjAyXFj5kZGSAQBCfnSE5IzEvNceQgQEAW8AgRA==';
   late int uid = userData?['id'];
 
   late final AgoraClient client = AgoraClient(
