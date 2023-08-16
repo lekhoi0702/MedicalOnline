@@ -462,7 +462,7 @@ class _HomePageState extends State<HomePage> {
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0),
                     child: const Text(
-                      'Top bác sĩ',
+                      'Bác sĩ trực tuyến',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -478,6 +478,7 @@ class _HomePageState extends State<HomePage> {
                         itemCount: DoctorOnline.length,
                         itemBuilder: (context, index) {
                           dynamic doctors = DoctorOnline[index];
+                          if  (doctors['trangThai'] == 1)
                           return Container(
                             width: 300,
                             // Đặt chiều rộng cố định cho mỗi phần tử
@@ -673,15 +674,16 @@ class _HomePageState extends State<HomePage> {
       int appointmentMinute = int.parse(parts[1]);
 
       if (now.hour > appointmentHour ||
-          (now.hour == appointmentHour && now.minute+5 >= appointmentMinute)) {
+          (now.hour == appointmentHour && now.minute > appointmentMinute+5 )) {
           setState(() {
             lateAppointment = true;
             isAppointment = false;
           });
       }
-      if (now.hour == appointmentHour && now.minute == appointmentMinute) {
+      if (now.hour == appointmentHour && now.minute <= appointmentMinute+5 && now.minute >= appointmentMinute) {
         setState(() {
           isAppointment = true;
+          lateAppointment = false;
         });
       }
     }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../main.dart';
 import '../../api/delete_appointment.dart';
+import '../../api/napxu.dart';
 import '../../api/upcoming_appointment.dart';
 
 
@@ -139,7 +140,7 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
                               children: [
                                 InkWell(
                                   onTap: (){
-                                    _showConfirmationDialog(appointment['maLH'], userData?['maKH']);
+                                    _showConfirmationDialog(appointment['maLH'], userData?['maKH'],appointment['giaOnline']);
                                   },
                                   child: Container(
                                     width: 150,
@@ -224,12 +225,13 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
     );
   }
 
-  Future<void> _cancelLichHen(int maLH, int maKH) async {
+  Future<void> _cancelLichHen(int maLH, int maKH, int gia) async {
     try {
-      // Call the API to cancel the appointment
+
       await ApiServiceDeleteLH.delete_lh(maLH, maKH);
-      // Once the API call is successful, refresh the list of appointments
+
       setState(() {
+        _gotopayment(gia);
         _getLichHen();
       });
     } catch (e) {
@@ -238,9 +240,17 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
     }
   }
 
+/*  void _gotopayment() {
+    int makh = userData?['maKH'];
+    int total = userData?['xu']  - widget.giaDoctor;
+    print(total);
+    dynamic response =  ApiServicePayment.payment(makh,total );
+
+  }*/
 
 
-  Future<void> _showConfirmationDialog(int maLH, int maBS) async {
+
+  Future<void> _showConfirmationDialog(int maLH, int maBS,int gia) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // Prevent the dialog from being dismissed by tapping outside
@@ -276,7 +286,7 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
               ),),
               onPressed: () {
                 // Call the function to cancel the appointment
-                _cancelLichHen(maLH, maBS);
+                _cancelLichHen(maLH, maBS,gia);
                 Navigator.of(context).pop(); // Close the dialog
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
@@ -299,12 +309,6 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
       },
     );
   }
-
-
-
-
-
-
   void _getLichHen() async {
     try {
       dynamic response =
@@ -315,5 +319,13 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
     } catch (e) {
       print('Error fetching appointments: $e');
     }
+  }
+
+
+  void _gotopayment(int xu) async{
+    int makh = userData?['maKH'];
+    int total = userData?['xu'] + xu;
+    dynamic response = await ApiServicePayment.payment(makh,total );
+
   }
 }

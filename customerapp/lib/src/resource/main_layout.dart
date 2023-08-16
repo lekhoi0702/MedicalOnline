@@ -2,6 +2,8 @@
 import 'package:customerapp/src/api/profile.dart';
 import 'package:flutter/material.dart';
 
+import '../../main.dart';
+import '../api/getxu.dart';
 import 'appointment/schedule_page.dart';
 import 'home_page.dart';
 
@@ -17,6 +19,7 @@ class MainLayout extends StatefulWidget {
 }
 
 class _MainLayoutState extends State<MainLayout> {
+
   //variable declaration
   int currentPage = 0;
   final PageController _page = PageController();
@@ -48,8 +51,12 @@ class _MainLayoutState extends State<MainLayout> {
               duration: const Duration(milliseconds: 500),
               curve: Curves.easeInOut,
             );
+            if (page == 2) {
+              _getXu();
+            }
           });
         },
+
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -63,11 +70,17 @@ class _MainLayoutState extends State<MainLayout> {
             icon: Icon(Icons.person),
             label: 'Tài khoản',
           ),
-
-
-
         ],
       ),
     );
   }
+  void _getXu() async {
+    try {
+      dynamic response = await ApiServiceGetxu.kh_getxu(userData?['maKH']);
+      userData?['xu'] = response['xu'];
+    } catch (e) {
+      print('Error fetching appointments: $e');
+    }
+  }
+
 }

@@ -1,10 +1,15 @@
 import 'package:customerapp/main.dart';
+import 'package:customerapp/src/api/getxu.dart';
+import 'package:customerapp/src/resource/paypal.dart';
 import 'package:flutter/material.dart';
 
 import '../resource/sign_in/login_page.dart';
 import '../resource/sign_in/new_password.dart';
 
+
+
 class CustomerProfileScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +51,13 @@ class CustomerProfileScreen extends StatelessWidget {
               style: TextStyle(fontSize: 18),
               textAlign: TextAlign.center,
             ),
+            SizedBox(height: 10),
+            Text(
+              'Số xu hiện tại: ${userData?['xu']}',
+              style: TextStyle(fontSize: 18),
+              textAlign: TextAlign.center,
+            ),
+
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
@@ -65,6 +77,16 @@ class CustomerProfileScreen extends StatelessWidget {
                 );
               },
               child: Text('Đăng Xuất'),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Payment()),
+                );
+              },
+              child: Text('Nạp xu'),
             ),
           ],
         ),

@@ -11,6 +11,7 @@ class UserData with ChangeNotifier {
   String? username;
   String? passwrd;
   int? roles;
+  int? xu;
 
   // Phương thức để cập nhật dữ liệu
   void updateUserData({
@@ -24,6 +25,7 @@ class UserData with ChangeNotifier {
     String? username,
     String? passwrd,
     int? roles,
+    int? xu
   }) {
     this.maKH = maKH;
     this.firstName = firstName;
@@ -35,6 +37,7 @@ class UserData with ChangeNotifier {
     this.username = username;
     this.passwrd = passwrd;
     this.roles = roles;
+    this.xu = xu;
 
     // Gọi phương thức notifyListeners để thông báo rằng dữ liệu đã thay đổi
     notifyListeners();

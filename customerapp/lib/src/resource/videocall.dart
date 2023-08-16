@@ -15,8 +15,8 @@ class VideoCallScreen extends StatefulWidget {
 
 class _VideoCallScreenState extends State<VideoCallScreen> {
   Map<String, dynamic>? agora;
-  late String channelName = 'chanel1';
-  late String token = '007eJxTYAgLtHevlz92QIvx21mf77OOvw7umt8ZUq9jap4fJPk8kluBwcIo0dTI0NTY0sLIyCTZwtgiOdkoxSTJzNDUICnV0jB18berKQ2BjAyXFj5kZGSAQBCfnSE5IzEvNceQgQEAW8AgRA==';
+  late String channelName = 'test';
+  late String token = '007eJxTYPDriQiz+TnPUEiqZ8K++JN5bjknjALXP38UuOHooquJHVsVGCyMEk2NDE2NLS2MjEySLYwtkpONUkySzAxNDZJSLQ1T10vfSWkIZGRQDWliZGSAQBCfhaEktbiEgQEATHsfWQ==';
   late int uid = userData?['id'];
 
   late final AgoraClient client = AgoraClient(
@@ -65,7 +65,7 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
     );
   }
 
-/*void _getVideo() async {
+void _getVideo() async {
     int malh = widget.maLH;
     try {
       dynamic response =
@@ -80,5 +80,5 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
     } catch (e) {
       print('Error fetching appointments: $e');
     }
-  }*/
+  }
 }

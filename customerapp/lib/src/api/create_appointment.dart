@@ -8,12 +8,13 @@ import '../../main.dart';
 class ApiServiceCreateLH {
   static final String apiUrl = '${ipServer}KHAppointment/Create';
 
-  static Future<Map<String, dynamic>> create_lh(int makh,int mabs,String ngayhen, String giohen,) async {
+  static Future<Map<String, dynamic>> create_lh(int makh,int mabs,String ngayhen, String giohen,String gia) async {
     Map<String, String> requestBody = {
       'maKH': makh.toString(),
       'maBS':mabs.toString(),
       'ngayHen':ngayhen,
-      'gioHen':giohen
+      'gioHen':giohen,
+      'gia':gia
 
 
     };

@@ -1,9 +1,11 @@
+import 'package:customerapp/main.dart';
 import 'package:customerapp/src/api/get_danhgia_doctor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../api/doctor_info.dart';
 import '../api/get_danhgia.dart';
+import '../api/napxu.dart';
 import 'appointment/create_appointment_page.dart';
 
 class DoctorInfoPage extends StatefulWidget {
@@ -215,7 +217,7 @@ class _DoctorInfoPageState extends State<DoctorInfoPage> {
       ),
       bottomNavigationBar: Container(
         padding: EdgeInsets.all(15),
-        height: 90,
+        height: 130,
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
@@ -230,9 +232,25 @@ class _DoctorInfoPageState extends State<DoctorInfoPage> {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "",
+                  style: TextStyle(
+                    color: Colors.black54,
+                  ),
+                ),
+                Text(
+                  "${InfoBs?['gia']} xu",
+                  style: TextStyle(
+                    color: Colors.black54,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
             InkWell(
-              onTap: _createCalendar,
+              onTap: checkCoint,
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.symmetric(vertical: 18),
@@ -270,13 +288,29 @@ class _DoctorInfoPageState extends State<DoctorInfoPage> {
       print('Error fetching appointments: $e');
     }
   }
+  void checkCoint(){
+    if (userData?['xu'] >= InfoBs?['gia'] ){
+      setState(() {
+        _createCalendar();
+      });
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Bạn không đủ xu'),
+          duration: Duration(seconds: 1),
+        ),
+      );
+    }
+  }
+
 
   void _createCalendar() {
+    int gia = InfoBs?['gia'];
     // Điều hướng sang trang đặt lịch
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => CreateCalendarPage(doctorID: widget.doctorID),
+        builder: (context) => CreateCalendarPage(doctorID: widget.doctorID, giaDoctor: gia),
       ),
     );
   }

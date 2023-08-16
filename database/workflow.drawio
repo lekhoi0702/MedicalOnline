@@ -1,0 +1,63 @@
+<mxfile host="app.diagrams.net" modified="2023-08-15T07:22:32.724Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36 Edg/115.0.1901.203" etag="jrAgdV5swvAEptPJ4lqs" version="21.6.8" type="device">
+  <diagram name="Trang-1" id="_Q3RMM-fhAgSj4Bt8N8z">
+    <mxGraphModel dx="830" dy="484" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="smxSKTol1KhF02GhoB1R-110" value="Bác sĩ" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="180" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="smxSKTol1KhF02GhoB1R-112" value="" style="ellipse;html=1;shape=startState;fillColor=#000000;strokeColor=#ff0000;" vertex="1" parent="1">
+          <mxGeometry x="80" y="200" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="smxSKTol1KhF02GhoB1R-113" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" edge="1" source="smxSKTol1KhF02GhoB1R-112" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="215" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="smxSKTol1KhF02GhoB1R-114" value="Truy cập trang lịch hẹn chờ xác nhận" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="160" y="200" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="smxSKTol1KhF02GhoB1R-115" value="" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="270" y="219.57999999999998" as="sourcePoint" />
+            <mxPoint x="350" y="219.57999999999998" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="smxSKTol1KhF02GhoB1R-116" value="Chọn lịch hẹn" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="350" y="200" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="smxSKTol1KhF02GhoB1R-117" value="" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="460" y="220" as="sourcePoint" />
+            <mxPoint x="540" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="smxSKTol1KhF02GhoB1R-118" value="Chọn xác nhận lịch hẹn" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="540" y="200" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="smxSKTol1KhF02GhoB1R-122" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#ff0000;" vertex="1" parent="1">
+          <mxGeometry x="880" y="207.5" width="30" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="smxSKTol1KhF02GhoB1R-124" value="" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="650" y="219.57999999999998" as="sourcePoint" />
+            <mxPoint x="720" y="220" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="300" y="220" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="smxSKTol1KhF02GhoB1R-125" value="Xác nhận lịch hẹn thành công" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="720" y="200" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="smxSKTol1KhF02GhoB1R-126" value="" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=horizontal;curved=0;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="840" y="219.57999999999998" as="sourcePoint" />
+            <mxPoint x="880" y="219.75" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

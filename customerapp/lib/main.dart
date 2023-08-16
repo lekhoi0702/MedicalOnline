@@ -1,6 +1,8 @@
 import 'package:customerapp/src/resource/app.dart';
 import 'package:flutter/material.dart';
 
-String ipServer = 'http://192.168.1.20:5000//';
+String ipServer = 'http://192.168.1.19:5000//';
 Map<String, dynamic>? userData;
-void main() => runApp(MyApp());
+void main(){
+  runApp(MyApp());
+}

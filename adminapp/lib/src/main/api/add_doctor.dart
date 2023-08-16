@@ -5,10 +5,10 @@ import '../../../main.dart';
 
 
 class ApiServiceAddDoctor {
-  static final String apiUrl = '${ipServer}ADCreateAccount/Doctor'; // Thay thế your_api_url bằng địa chỉ của Flask API
+  static final String apiUrl = '${ipServer}ADCreateAccount/Doctor';
 
   static Future<Map<String, dynamic>> add_doctor(String username, String password,String firstname, String lastname,
-      String phonenumber, String chuyenkhoa, String email, String ngaysinh,String avatar,String gioithieu) async {
+      String phonenumber, String chuyenkhoa, String email, String ngaysinh,String avatar,String gioithieu,String online,String tainha) async {
     Map<String, String> requestBody = {
       'userName': username,
       'password': password,
@@ -19,7 +19,9 @@ class ApiServiceAddDoctor {
       'ngaySinh': ngaysinh,
       'chuyenKhoa':chuyenkhoa,
       'avatar':avatar,
-      'gioiThieu':gioithieu
+      'gioiThieu':gioithieu,
+      'online':online,
+      'taiNha':tainha
 
     };
 
@@ -29,14 +31,9 @@ class ApiServiceAddDoctor {
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(requestBody),
       );
+      return jsonDecode(response.body);
 
-      if (response.statusCode == 200) {
-        // Đăng nhập thành công
-        return jsonDecode(response.body);
-      } else {
-        // Đăng nhập thất bại
-        throw Exception('Failed to login: ${response.reasonPhrase}');
-      }
+
     } catch (error) {
       // Xử lý lỗi nếu có
       throw Exception('Error: $error');

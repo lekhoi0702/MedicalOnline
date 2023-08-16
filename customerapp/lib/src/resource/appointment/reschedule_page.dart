@@ -31,9 +31,14 @@ class _ReschedulePageState extends State<ReschedulePage> {
   @override
   void initState() {
     super.initState();
+    final now = DateTime.now();
+    int currentHour = now.hour;
+    int currentMinute = now.minute;
+
     // Tạo danh sách các giờ cách nhau 30 phút
-    for (int hour = 0; hour < 24; hour++) {
-      for (int minute = 0; minute < 60; minute += 30) {
+    for (int hour = currentHour; hour < 24; hour++) {
+      int startMinute = (hour == currentHour) ? ((currentMinute / 30).ceil() * 30) : 0;
+      for (int minute = startMinute; minute < 60; minute += 30) {
         String formattedTime = '${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}';
         _hoursList.add(formattedTime);
       }
@@ -208,13 +213,9 @@ class _ReschedulePageState extends State<ReschedulePage> {
           ),
         );
         return;
-
       }
     } catch (error) {
       print(error);
-      //showCreateLHErrorDialog(context);
-      // Xử lý lỗi nếu có
-
     }
   }
 

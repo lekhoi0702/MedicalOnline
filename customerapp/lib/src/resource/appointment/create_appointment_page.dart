@@ -5,12 +5,14 @@ import 'package:intl/intl.dart';
 
 import '../../../../main.dart';
 import '../../api/create_appointment.dart';
+import '../../api/napxu.dart';
 
 
 class CreateCalendarPage extends StatefulWidget {
-  final int doctorID;
+  late final int doctorID;
+  late final int giaDoctor;
 
-  CreateCalendarPage({required this.doctorID});
+  CreateCalendarPage({required this.doctorID, required this.giaDoctor});
 
   @override
   _CreateCalendarPageState createState() => _CreateCalendarPageState();
@@ -181,6 +183,14 @@ class _CreateCalendarPageState extends State<CreateCalendarPage> {
     return '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
   }
 
+  void _gotopayment() {
+    int makh = userData?['maKH'];
+    int total = userData?['xu']  - widget.giaDoctor;
+    print(total);
+    dynamic response =  ApiServicePayment.payment(makh,total );
+
+  }
+
   void _CreateCalendar() async {
     final formattedDate = formatDate(_selectedDay);
     final formattedTime = _selectedHour;
@@ -202,7 +212,7 @@ class _CreateCalendarPageState extends State<CreateCalendarPage> {
 
     try {
       Map<String, dynamic> result = await ApiServiceCreateLH.create_lh(
-          maKH, maBS, formattedDate, formattedTime!);
+          maKH, maBS, formattedDate, formattedTime!,widget.giaDoctor.toString());
       if (result.containsKey('message')) {
         String message = result['message'];
         print(message);
@@ -212,7 +222,10 @@ class _CreateCalendarPageState extends State<CreateCalendarPage> {
             duration: Duration(seconds: 1),
           ),
         );
-        return;
+      } if (result['message'] == "Đặt lịch thành công"){
+        setState(() {
+          _gotopayment();
+        });
       }
     } catch (error) {
       print(error);

@@ -11,7 +11,7 @@ class AddDoctorScreen extends StatefulWidget {
 
 class AddDoctorScreenState extends State<AddDoctorScreen> {
   bool _showPassword = false;
-  bool _passwordNotEmpty = false;
+  bool _hasError = false;
   TextEditingController _chuyenKhoa = new TextEditingController();
   TextEditingController _usernameController = new TextEditingController();
   TextEditingController _passController = new TextEditingController();
@@ -22,6 +22,8 @@ class AddDoctorScreenState extends State<AddDoctorScreen> {
   TextEditingController _birthday = new TextEditingController();
   TextEditingController _avatarController = new TextEditingController();
   TextEditingController _gioithieuController = new TextEditingController();
+  TextEditingController _khamonlineController = new TextEditingController();
+  TextEditingController _khamtainhaController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -263,6 +265,56 @@ class AddDoctorScreenState extends State<AddDoctorScreen> {
                   ),
                 ),
                 Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        flex: 1,
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 5.0),
+                          child: TextField(
+                            style: TextStyle(fontSize: 12, color: Colors.black),
+                            controller: _khamonlineController,
+                            decoration: InputDecoration(
+                              labelText: "Giá đặt khám online",
+                              labelStyle: TextStyle(
+                                  color: Color(0xff888888), fontSize: 12),
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color(0xffCED0D2), width: 1),
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(6)),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 5.0),
+                          child: TextField(
+                            style: TextStyle(fontSize: 12, color: Colors.black),
+                            controller: _khamtainhaController,
+                            decoration: InputDecoration(
+                              labelText: "Giá đặt khám tại nhà",
+                              labelStyle: TextStyle(
+                                  color: Color(0xff888888), fontSize: 12),
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color(0xffCED0D2), width: 1),
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(6)),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                Padding(
                   padding: const EdgeInsets.fromLTRB(500, 0, 500, 0),
                   child: SizedBox(
                     width: double.infinity,
@@ -299,6 +351,30 @@ class AddDoctorScreenState extends State<AddDoctorScreen> {
     String ngaysinh = _birthday.text.trim();
     String avatar = _avatarController.text.trim();
     String gioithieu = _gioithieuController.text.trim();
+    String online = _khamonlineController.text.trim();
+    String tainha = _khamtainhaController.text.trim();
+    if (_usernameController.text.isEmpty ||
+        _passController.text.isEmpty ||
+        _firstnameController.text.isEmpty ||
+        _lassnameController.text.isEmpty ||
+        _phonenumberController.text.isEmpty ||
+        _birthday.text.isEmpty ||
+        _emailController.text.isEmpty ||
+          _chuyenKhoa.text.isEmpty ||
+    _avatarController.text.isEmpty ||
+    _gioithieuController.text.isEmpty ||
+    _khamonlineController.text.isEmpty ||
+    _khamtainhaController.text.isEmpty) {
+      setState(() {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Vui lòng nhập đầy đủ thông tin'),
+            duration: Duration(seconds: 1),
+          ),
+        );
+      });
+      return; // Dừng hàm nếu có lỗi
+    }
 
     try {
       Map<String, dynamic> result = await ApiServiceAddDoctor.add_doctor(
@@ -311,10 +387,10 @@ class AddDoctorScreenState extends State<AddDoctorScreen> {
           email,
           ngaysinh,
           avatar,
-          gioithieu);
+          gioithieu,online,tainha);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Tạo tài khoản bác sĩ thành công'),
+          content: Text('${result['message']}'),
           duration: Duration(seconds: 1),
         ),
       );

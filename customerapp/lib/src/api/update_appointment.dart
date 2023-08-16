@@ -19,15 +19,8 @@ class ApiServiceUpdateLH {
         headers: headers,
         body: jsonEncode(requestBody),
       );
+      return jsonDecode(response.body);
 
-      if (response.statusCode == 201) {
-        // Update lịch hẹn thành công
-        return jsonDecode(response.body);
-        print(response);
-      } else {
-        // Có lỗi xảy ra khi update lịch hẹn
-        throw Exception('Failed to update appointment: ${response.reasonPhrase}');
-      }
     } catch (error) {
       // Xử lý lỗi nếu có
       throw Exception('Error: $error');

@@ -13,8 +13,8 @@ class SignUpPageState extends State<SignUpPage> {
   String message = '';
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   bool _showPassword = false;
-  bool _passwordNotEmpty = false;
   bool _showMessage = false;
+  bool _hasError = false;
   TextEditingController _birthday = new TextEditingController();
   TextEditingController _usernameController = new TextEditingController();
   TextEditingController _passController = new TextEditingController();
@@ -163,11 +163,6 @@ class SignUpPageState extends State<SignUpPage> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(6)))),
                         ),
-
-                        /*GestureDetector(
-                        onTap: showPass,
-                        child: Text(_showPassword ? "HIDE" : "SHOW",style: TextStyle(color: Colors.blue,fontSize: 12, fontWeight: FontWeight.bold),),
-                      )*/
                       ],
                     ),
                   ),
@@ -231,19 +226,14 @@ class SignUpPageState extends State<SignUpPage> {
                                   BorderRadius.all(Radius.circular(6)))),
                     ),
                   ),
-                  Container(
-                    constraints:
-                        BoxConstraints.loose(Size(double.infinity, 30)),
-                    alignment: AlignmentDirectional.centerEnd,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
-                      child: Text("QUÊN MẬT KHẨU?",
-                          style: TextStyle(fontSize: 10, color: Colors.blue)),
-                    ),
-                  ),
                   if (_showMessage)
                     Text(
                       '$message',
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  if (_hasError)
+                    Text(
+                      'Vui lòng điền đầy đủ thông tin',
                       style: TextStyle(color: Colors.red),
                     ),
                   Padding(
@@ -294,6 +284,18 @@ class SignUpPageState extends State<SignUpPage> {
   }
 
   void onSignUpClicked() async {
+    if (_usernameController.text.isEmpty ||
+        _passController.text.isEmpty ||
+        _firstnameController.text.isEmpty ||
+        _lassnameController.text.isEmpty ||
+        _phonenumberController.text.isEmpty ||
+        _birthday.text.isEmpty ||
+        _emailController.text.isEmpty) {
+      setState(() {
+        _hasError = true;
+      });
+      return; // Dừng hàm nếu có lỗi
+    }
     String username = _usernameController.text.trim();
     String password = _passController.text.trim();
     String firstname = _firstnameController.text.trim();
@@ -308,6 +310,7 @@ class SignUpPageState extends State<SignUpPage> {
       setState(() {
         message = result['message'];
         _showMessage = true;
+        _hasError = false;
       });
     } catch (error) {
       print('Error: $error');
@@ -322,3 +325,4 @@ class SignUpPageState extends State<SignUpPage> {
     return SignUpPage();
   }
 }
+

@@ -160,29 +160,7 @@ class NewPasswordPageState extends State<NewPasswordPage> {
                       ),
                     ),
                   ),
-                  Padding(
-                      padding: const EdgeInsets.fromLTRB(0,20,0,20),
-                      child: RichText(
-                          text: TextSpan(
-                              style: TextStyle(color: Colors.black,fontSize: 13),
-                              children: <TextSpan>[
-                                TextSpan(
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        Navigator.push(context, MaterialPageRoute(builder:(context)=>LoginPage()));
-                                      },
-                                    text: "Quay lại đăng nhập",
-                                    style: TextStyle(
-                                        color: Colors.blue,fontSize: 13
-                                    )
 
-                                )
-                              ]
-
-
-
-                          )
-                      )),
                 ],
               ),
             )),
@@ -192,8 +170,8 @@ class NewPasswordPageState extends State<NewPasswordPage> {
 
   void onSignUpClicked() async {
     String username = widget.username;
-    String password1 = _passController.text;
-    String password2 = _passController2.text;
+    String password1 = _passController.text.trim();
+    String password2 = _passController2.text.trim();
     if (password1 != password2) {
       setState(() {
         _checkpass = true;
@@ -208,6 +186,12 @@ class NewPasswordPageState extends State<NewPasswordPage> {
             await ApiServiceChangePassword.change_password(username, password1);
         setState(() {
           _ischange = true;
+          _checkpass = false;
+          _passwordEmpty = false;
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => LoginPage()),
+          );
         });
       } catch (error) {
         // Xử lý lỗi nếu có
